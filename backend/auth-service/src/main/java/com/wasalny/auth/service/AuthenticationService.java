@@ -5,7 +5,6 @@ import com.wasalny.auth.dto.RegisterUserDto;
 import com.wasalny.auth.dto.VerifyUserDto;
 import com.wasalny.auth.entity.User;
 import com.wasalny.auth.repository.UserRepository;
-import jakarta.mail.MessagingException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -112,11 +111,7 @@ public class AuthenticationService {
                 + "</body>"
                 + "</html>";
 
-        try {
-            emailService.sendVerificationEmail(user.getEmail(), subject, htmlMessage);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+        emailService.sendVerificationEmail(user.getEmail(), subject, htmlMessage);
     }
 
     private String generateVerificationCode() {

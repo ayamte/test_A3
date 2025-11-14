@@ -358,7 +358,9 @@
       - SPRING_REDIS_HOST=redis  
       - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-redis_password}  
       - JWT_SECRET=${JWT_SECRET}  
-      - JWT_EXPIRATION=${JWT_EXPIRATION:-86400000}  
+      - JWT_EXPIRATION=${JWT_EXPIRATION:-86400000} 
+      - SUPPORT_EMAIL=${SUPPORT_EMAIL}   
+      - APP_PASSWORD=${APP_PASSWORD}  
     depends_on:  
       postgres-auth:  
         condition: service_healthy  
@@ -398,6 +400,7 @@
       - SPRING_DATASOURCE_PASSWORD=${USER_DB_PASSWORD:-wasalny_password}  
       - SPRING_REDIS_HOST=redis  
       - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-redis_password}  
+      
     depends_on:  
       postgres-user:  
         condition: service_healthy  

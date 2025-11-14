@@ -5,6 +5,7 @@ import com.wasalny.auth.dto.RegisterUserDto;
 import com.wasalny.auth.dto.VerifyUserDto;
 import com.wasalny.auth.entity.User;
 import com.wasalny.auth.responses.LoginResponse;
+import com.wasalny.auth.responses.SignupResponse;
 import com.wasalny.auth.service.AuthenticationService;
 import com.wasalny.auth.service.JwtService;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +23,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
+    public ResponseEntity<SignupResponse> register(@RequestBody RegisterUserDto registerUserDto) {
         User registeredUser = authenticationService.signup(registerUserDto);
-        return ResponseEntity.ok(registeredUser);
+        SignupResponse response = new SignupResponse(
+                "Inscription réussie. Veuillez vérifier votre email pour activer votre compte.",
+                registeredUser.getEmail()
+        );
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")
