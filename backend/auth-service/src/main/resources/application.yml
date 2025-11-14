@@ -1,0 +1,42 @@
+spring:  
+  application:  
+    name: auth-service  
+  config:  
+    import: "optional:configserver:http://config-server:8888"  
+    
+  # JPA Configuration  
+  jpa:  
+    hibernate:  
+      ddl-auto: update  
+    properties:  
+      hibernate:  
+        dialect: org.hibernate.dialect.PostgreSQLDialect  
+    
+  # Mail Configuration  
+  mail:  
+    host: smtp.gmail.com  
+    port: 587
+    username: ${SUPPORT_EMAIL}
+    password: ${APP_PASSWORD}
+    properties:  
+      mail:  
+        smtp:  
+          auth: true  
+          starttls:  
+            enable: true  
+  
+# JWT Configuration  
+security:  
+  jwt:  
+    secret-key: ${JWT_SECRET}  
+    expiration-time: ${JWT_EXPIRATION:3600000}  
+  
+# Actuator  
+management:  
+  endpoints:  
+    web:  
+      exposure:  
+        include: health,info  
+  endpoint:  
+    health:  
+      show-details: always
